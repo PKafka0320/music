@@ -6,5 +6,5 @@ piano.start("/hotMilk");
 while(true) {
     piano.add(1);
     piano.send();
-    4::minute => now;
+    4.5::minute => now;
 }
