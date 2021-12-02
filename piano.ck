@@ -23,17 +23,29 @@ Rhodey r4 => global_reverb;
 Rhodey r5 => global_reverb;
 Rhodey r6 => global_reverb;
 
-["B5","G5","E5","C5"] @=> string mnotes1[];
-["B5","F#5","D#5","C5"] @=> string mnotes2[];
-["B5","A5","F#5","D5","B4"] @=> string mnotes3[];
-["A5","G5","D5","B4"] @=> string mnotes4[];
-["A5","F#5","D5","B4"] @=> string mnotes5[];
-["B6","F#6","D#6","C6"] @=> string mnotes6[];
-["G7","D7","B6","G6","E6","E5"] @=> string mnotes7[];
-["A5","F#5","D#5","C5"] @=> string mnotes8[];
-["B5","F#5","C5"] @=> string mnotes9[];
-["G5","E5","C5"] @=> string mnotes10[];
-["A5","E5","C5"] @=> string mnotes11[];
+["B5","G5","E5","C5"] @=> string mnotes1[]; // M1
+["B5","F#5","D#5","C5"] @=> string mnotes2[]; // M2
+["B5","A5","F#5","D5","B4"] @=> string mnotes3[]; // M3
+["A5","G5","D5","B4"] @=> string mnotes4[]; // M4
+["A5","F#5","D5","B4"] @=> string mnotes5[]; // M5
+["B6","F#6","D#6","C6"] @=> string mnotes6[]; // M6
+["G7","D7","B6","G6","E6","E5"] @=> string mnotes7[]; // M7
+["A5","F#5","D#5","C5"] @=> string mnotes8[]; // M8
+["B5","F#5","C5"] @=> string mnotes9[]; // M9
+["G5","E5","C5"] @=> string mnotes10[]; // M:
+["A5","E5","C5"] @=> string mnotes11[]; // M;
+["A5","D#5","C5"] @=> string mnotes12[]; // M<
+["D6","F#5","D#5"] @=> string mnotes13[]; // M=
+["B5","F#5","D5","B4"] @=> string mnotes14[]; // M>
+["F#6","B5","F#5"] @=> string mnotes15[]; // M?
+["G6","A5","G5"] @=> string mnotes16[]; // M@
+["D6","A5","G5"] @=> string mnotes17[]; // MA
+["B5","E5","C5"] @=> string mnotes18[]; // MB
+["C5","G4"] @=> string mnotes19[]; // MC
+["A4","F#4"] @=> string mnotes20[]; // MD
+["G5","D5"] @=> string mnotes21[]; // ME
+["B4","G4"] @=> string mnotes22[]; // MF
+["G6","A5"] @=> string mnotes23[]; // MG
 
 [
 "G7","F#7","D7","B6", // -1.1-
@@ -86,11 +98,33 @@ Rhodey r6 => global_reverb;
 "M2","D7", "E7","D7","B6","A6", // -3.4-
 "M5","-1", "-1",
 "M4","-1", "-1","G6","A6","G7","F#7","D7","A6",
-"M1","M1", "M:","M;"
+"M1","M1", "M:","M;",
+"M2","D5", "M<","M=", // -3.5-
+"M>","M5", "M?","M>",
+"M4","M4", "G6","F#6","D6","B5",
+"M1","M1", "M1","M1",
+"M2","M2", "M2","G6","A6","G7","F#7","D7","A6", // -4.1-
+"M5","M5", "M5","M5",
+"M4","M4", "M@","F#6","MA","B5",
+"MB","A5","M:","A5","-1","D5", "MC","-1","MC","B5","A5","G5",
+"A5","D6","G5","-1","F#5","-1","D5", "MD","-1","ME","A5","-1","D5", // -4.2-
+"MF","-1","M5", "M5","M5",
+"MG","F#6","-1","D6","-1","D5","A5","D5", "G6","F#6","D6","A5",
+"M1","M1", "M1","M1",
+"M2","M2", "M2","G6","A6","G7","F#7","D7","A6", // -4.3-
+"M5","M5", "M5","M5",
+"M4","M4", "M@","F#6","MA","B5",
+"M1","-1", "-1",
+"M2","-1", "-1","G6","A6","G7","F#7","D7","A6", // -4.4-
+"M5","-1", "G6","F#6","D6","B5",
+"M4","G5","D6", "B5","-1","D5","G5","A5",
+"M1","-1", "-1",
+"-1", "G6","F#6","D6","B5",
+"M5","-1", "-1","G6","A6","G7","F#7","D7","A6"// -4.5-
 ] @=> string anotes[];
 
 [
-"M1"
+"M2"
 ] @=> string notes[];
 
 // 16 per block (8 per half block)
@@ -134,7 +168,6 @@ QN,QN, QN,EN,EN,
 QN,QN, HN, // -3.1-
 QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT,
 QN,QN, SPT,SMT,SPT,SMT,SPT,SMT,SPT,SMT,
-
 QN,QN, EN,EN,EN,EN, // -3.2-
 QN,QN, HN,
 QN,QN, HN,
@@ -146,7 +179,29 @@ QN,QN, SPT,SMT,SPT,SMT,SPT,SMT,SPT,SMT,
 QN,QN, EN,EN,EN,EN, // -3.4-
 QN,QN, HN,
 QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT,
-QN,QN, QN,QN
+QN,QN, QN,QN,
+QN,QN, QN,QN, // -3.5-
+QN,QN, QN,QN,
+QN,QN, EN,EN,EN,EN,
+QN,QN, QN,QN,
+QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT, // -4.1-
+QN,QN, QN,QN,
+QN,QN, EN,EN,EN,EN,
+EN,EN,SPT,SMT,SPT,SMT, EN,EN,SPT,SMT,SPT,SMT,
+EN,SPT,SMT,SPT,SMT,SPT,SMT, EN,EN,SPT,SMT,SPT,SMT, // -4.2-
+EN,EN,QN, QN,QN,
+SPT,SMT,SPT,SMT,SPT,SMT,SPT,SMT, EN,EN,EN,EN,
+QN,QN, QN,QN,
+QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT, // -4.3-
+QN,QN, QN,QN,
+QN,QN, EN,EN,EN,EN,
+QN,QN, HN,
+QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT, // -4.4-
+QN,QN, EN,EN,EN,EN,
+QN,EN,EN, QN,SPT,SMT,SPT,SMT,
+QN,QN, HN,
+HN, EN,EN,EN,EN,
+QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT // -4.5-
 ] @=> float adurs[];
 
 [
@@ -263,15 +318,71 @@ fun void piano(string notes[], float durs[]) {
                 spork ~ playPiano(r2, mnotes9[1], durs[i]);
                 spork ~ playPiano(r3, mnotes9[2], durs[i]);
             }
-            else if(notes[i].charAt(1)-48 == 10) { // M9
+            else if(notes[i].charAt(1)-48 == 10) { // M:
                 spork ~ playPiano(r1, mnotes10[0], durs[i]);
                 spork ~ playPiano(r2, mnotes10[1], durs[i]);
                 spork ~ playPiano(r3, mnotes10[2], durs[i]);
             }
-            else if(notes[i].charAt(1)-48 == 11) { // M9
+            else if(notes[i].charAt(1)-48 == 11) { // M;
                 spork ~ playPiano(r1, mnotes11[0], durs[i]);
                 spork ~ playPiano(r2, mnotes11[1], durs[i]);
                 spork ~ playPiano(r3, mnotes11[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 12) { // M<
+                spork ~ playPiano(r1, mnotes12[0], durs[i]);
+                spork ~ playPiano(r2, mnotes12[1], durs[i]);
+                spork ~ playPiano(r3, mnotes12[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 13) { // M=
+                spork ~ playPiano(r1, mnotes13[0], durs[i]);
+                spork ~ playPiano(r2, mnotes13[1], durs[i]);
+                spork ~ playPiano(r3, mnotes13[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 14) { // M>
+                spork ~ playPiano(r1, mnotes14[0], durs[i]);
+                spork ~ playPiano(r2, mnotes14[1], durs[i]);
+                spork ~ playPiano(r3, mnotes14[2], durs[i]);
+                spork ~ playPiano(r4, mnotes14[3], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 15) { // M?
+                spork ~ playPiano(r1, mnotes15[0], durs[i]);
+                spork ~ playPiano(r2, mnotes15[1], durs[i]);
+                spork ~ playPiano(r3, mnotes15[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 16) { // M@
+                spork ~ playPiano(r1, mnotes16[0], durs[i]);
+                spork ~ playPiano(r2, mnotes16[1], durs[i]);
+                spork ~ playPiano(r3, mnotes16[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 17) { // MA
+                spork ~ playPiano(r1, mnotes17[0], durs[i]);
+                spork ~ playPiano(r2, mnotes17[1], durs[i]);
+                spork ~ playPiano(r3, mnotes17[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 18) { // MB
+                spork ~ playPiano(r1, mnotes18[0], durs[i]);
+                spork ~ playPiano(r2, mnotes18[1], durs[i]);
+                spork ~ playPiano(r3, mnotes18[2], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 19) { // MC
+                spork ~ playPiano(r1, mnotes19[0], durs[i]);
+                spork ~ playPiano(r2, mnotes19[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 20) { // MD
+                spork ~ playPiano(r1, mnotes20[0], durs[i]);
+                spork ~ playPiano(r2, mnotes20[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 21) { // ME
+                spork ~ playPiano(r1, mnotes21[0], durs[i]);
+                spork ~ playPiano(r2, mnotes21[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 22) { // MF
+                spork ~ playPiano(r1, mnotes22[0], durs[i]);
+                spork ~ playPiano(r2, mnotes22[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 23) { // MG
+                spork ~ playPiano(r1, mnotes23[0], durs[i]);
+                spork ~ playPiano(r2, mnotes23[1], durs[i]);
             }
             durs[i]::second => now;
         }
