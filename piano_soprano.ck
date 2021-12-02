@@ -1,6 +1,6 @@
 OscIn oin;
 1979 => oin.port;
-oin.addAddress("/hotMilk");
+oin.addAddress("/hotMilk/piano/soprano");
 OscMsg msg;
 
 float HN, QN, EN, SN, TN;
