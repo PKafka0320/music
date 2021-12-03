@@ -1,18 +1,18 @@
+BPM t;
+t.HN => float HN;
+t.QN => float QN;
+t.EN => float EN;
+t.SN => float SN;
+t.TN => float TN;
+t.SPT => float SPT;
+t.SMT => float SMT;
+t.EPS => float EPS;
+
 OscIn oin;
 1979 => oin.port;
 oin.addAddress("/hotMilk/piano/alto");
 OscMsg msg;
 
-float HN, QN, EN, SN, TN;
-75 => int beat;
-60.0 / beat => QN; // Second per Beat, 4, 0.8s
-QN * 2 => HN; // 8, 1.6s
-QN / 2 => EN; // 2, 0.4s
-QN / 4 => SN; // 1, 0.2s
-QN / 8 => TN; // 0.5, 0.1s
-SN + TN => float SPT; // 1.5
-SN - TN => float SMT; // 0.5
-EN + SN => float EPS; // 3
 
 NRev global_reverb => dac;
 0.1 => global_reverb.mix;
@@ -112,10 +112,6 @@ Rhodey r3 => global_reverb;
 "M3","-1", "-1" // -4.5-
 ] @=> string anotes[];
 
-[
-"D2","D3","D4","D5","D4","D3", "-1","D4","G3","F#2"
-] @=> string notes[];
-
 // 16 per block (8 per half block)
 [
 HN, // -1.1-
@@ -193,10 +189,6 @@ HN, HN,
 QN,QN, HN // -4.5-
 ] @=> float adurs[];
 
-[
-EN,EN,SN,SN,SN,SN, SN,EPS,EN,EN
-] @=> float durs[];
-
 while (true) {
     oin => now;
     while (oin.recv(msg) != 0) {
@@ -208,42 +200,42 @@ while (true) {
 }
 
 fun int midi(string name) {
-    [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
-    name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
-    notes[base] => int note;
-    if (0 <= base && base <= 6) {
-        if (name.charAt(1) == '#' || name.charAt(1) == 's') // sharp
-            notes[base] + 1 => note;
-        if (name.charAt(1) == 'b' || name.charAt(1) == 'f') // flat
-            notes[base] - 1 => note;
+        [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
+        name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
+        notes[base] => int note;
+        if (0 <= base && base <= 6) {
+            if (name.charAt(1) == '#' || name.charAt(1) == 's') // sharp
+                notes[base] + 1 => note;
+            if (name.charAt(1) == 'b' || name.charAt(1) == 'f') // flat
+                notes[base] - 1 => note;
+        }
+        else {
+            <<< "Illegal Note Name!" >>>;
+            return 0;
+        }
+        name.charAt(name.length()-1) - 48 => int oct; // 0, 1, 2, ..., 9
+        if (0 <= oct && oct <= 9) {
+            12 * (oct-1) +=> note;
+            return note;
+        }
+        else {
+            <<< "Illegal Octave!" >>>;
+            return 0;
+        }
     }
-    else {
-        <<< "Illegal Note Name!" >>>;
-        return 0;
+    
+    fun void playPiano(StkInstrument instrument, string note, float durs) {
+        if(note == "-1") {
+            durs::second => now;
+        }
+        else {
+            Std.mtof(midi(note)) => instrument.freq;
+            0.2 => instrument.noteOn;
+            (durs-TN/2.0)::second => now;
+            1 => instrument.noteOff;
+            (TN/2.0)::second => now;
+        }
     }
-    name.charAt(name.length()-1) - 48 => int oct; // 0, 1, 2, ..., 9
-    if (0 <= oct && oct <= 9) {
-        12 * (oct-1) +=> note;
-        return note;
-    }
-    else {
-        <<< "Illegal Octave!" >>>;
-        return 0;
-    }
-}
-
-fun void playPiano(StkInstrument instrument, string note, float durs) {
-    if(note == "-1") {
-        durs::second => now;
-    }
-    else {
-        Std.mtof(midi(note)) => instrument.freq;
-        0.4 => instrument.noteOn;
-        (durs-TN/2.0)::second => now;
-        1 => instrument.noteOff;
-        (TN/2.0)::second => now;
-    }
-}
 
 fun void piano(string notes[], float durs[]) {
     for(0 => int i; i < notes.size(); i++) {

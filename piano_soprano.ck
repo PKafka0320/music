@@ -1,17 +1,18 @@
+BPM t;
+t.HN => float HN;
+t.QN => float QN;
+t.EN => float EN;
+t.SN => float SN;
+t.TN => float TN;
+t.SPT => float SPT;
+t.SMT => float SMT;
+t.EPS => float EPS;
+
 OscIn oin;
 1979 => oin.port;
 oin.addAddress("/hotMilk/piano/soprano");
 OscMsg msg;
 
-float HN, QN, EN, SN, TN;
-75 => int beat;
-60.0 / beat => QN; // Second per Beat, 4, 0.8s
-QN * 2 => HN; // 8, 1.6s
-QN / 2 => EN; // 2, 0.4s
-QN / 4 => SN; // 1, 0.2s
-QN / 8 => TN; // 0.5, 0.1s
-SN + TN => float SPT; // 1.5
-SN - TN => float SMT; // 0.5
 
 NRev global_reverb => dac;
 0.1 => global_reverb.mix;
@@ -123,16 +124,6 @@ Rhodey S6 => global_reverb;
 "M5","-1", "-1","G6","A6","G7","F#7","D7","A6"// -4.5-
 ] @=> string anotes[];
 
-[
-"M2","M2", "M2","G6","A6","G7","F#7","D7","A6", // -4.1-
-"M5","M5", "M5","M5",
-"M4","M4", "M@","F#6","MA","B5",
-"MB","A5","M:","A5","-1","D5", "MC","-1","MC","B5","A5","G5",
-"A5","D6","G5","-1","F#5","-1","D5", "MD","-1","ME","A5","-1","D5", // -4.2-
-"MF","-1","M5", "M5","M5",
-"MG","F#6","-1","D6","-1","D5","A5","D5", "G6","F#6","D6","A5"
-] @=> string notes[];
-
 // 16 per block (8 per half block)
 [
 EN,EN,EN,EN,
@@ -210,73 +201,63 @@ HN, EN,EN,EN,EN,
 QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT // -4.5-
 ] @=> float adurs[];
 
-[
-QN,QN, EN,SPT,SMT,SPT,SMT,SPT,SMT, // -4.1-
-QN,QN, QN,QN,
-QN,QN, EN,EN,EN,EN,
-EN,EN,SPT,SMT,SPT,SMT, EN,EN,SPT,SMT,SPT,SMT,
-EN,SPT,SMT,SPT,SMT,SPT,SMT, EN,EN,SPT,SMT,SPT,SMT, // -4.2-
-EN,EN,QN, QN,QN,
-SPT,SMT,SPT,SMT,SPT,SMT,SPT,SMT, EN,EN,EN,EN
-] @=> float durs[];
-
 while (true) {
     oin => now;
     while (oin.recv(msg) != 0) {
         msg.getInt(0) => int play;
-        if (play) {
+        if (play == 1) {
             spork ~ piano(anotes, adurs);
         }
     }
 }
 
 fun int midi(string name) {
-    [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
-    name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
-    notes[base] => int note;
-    if (0 <= base && base <= 6) {
-        if (name.charAt(1) == '#' || name.charAt(1) == 's') // sharp
-            notes[base] + 1 => note;
-        if (name.charAt(1) == 'b' || name.charAt(1) == 'f') // flat
-            notes[base] - 1 => note;
+        [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
+        name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
+        notes[base] => int note;
+        if (0 <= base && base <= 6) {
+            if (name.charAt(1) == '#' || name.charAt(1) == 's') // sharp
+                notes[base] + 1 => note;
+            if (name.charAt(1) == 'b' || name.charAt(1) == 'f') // flat
+                notes[base] - 1 => note;
+        }
+        else {
+            <<< "Illegal Note Name!" >>>;
+            return 0;
+        }
+        name.charAt(name.length()-1) - 48 => int oct; // 0, 1, 2, ..., 9
+        if (0 <= oct && oct <= 9) {
+            12 * (oct-1) +=> note;
+            return note;
+        }
+        else {
+            <<< "Illegal Octave!" >>>;
+            return 0;
+        }
     }
-    else {
-        <<< "Illegal Note Name!" >>>;
-        return 0;
+    
+    fun void playPiano(StkInstrument instrument, string note, float durs) {
+        if(note == "-1") {
+            durs::second => now;
+        }
+        else {
+            Std.mtof(midi(note)) => instrument.freq;
+            0.2 => instrument.noteOn;
+            (durs-TN/2.0)::second => now;
+            1 => instrument.noteOff;
+            (TN/2.0)::second => now;
+        }
     }
-    name.charAt(name.length()-1) - 48 => int oct; // 0, 1, 2, ..., 9
-    if (0 <= oct && oct <= 9) {
-        12 * (oct-1) +=> note;
-        return note;
-    }
-    else {
-        <<< "Illegal Octave!" >>>;
-        return 0;
-    }
-}
-
-fun void playPiano(StkInstrument instrument, string note, float durs) {
-    if(note == "-1") {
-        durs::second => now;
-    }
-    else {
+    
+    fun void playPiano(StkInstrument instrument, string note, float durs, float delay) {
         Std.mtof(midi(note)) => instrument.freq;
-        0.2 => instrument.noteOn;
-        (durs-TN/2.0)::second => now;
+        1 => instrument.noteOff;
+        delay::second => now;
+        0.1 => instrument.noteOn;
+        (durs-delay-TN/2.0)::second => now;
         1 => instrument.noteOff;
         (TN/2.0)::second => now;
     }
-}
-
-fun void playPiano(StkInstrument instrument, string note, float durs, float delay) {
-    Std.mtof(midi(note)) => instrument.freq;
-    1 => instrument.noteOff;
-    delay::second => now;
-    0.1 => instrument.noteOn;
-    (durs-delay-TN/2.0)::second => now;
-    1 => instrument.noteOff;
-    (TN/2.0)::second => now;
-}
 
 fun void piano(string notes[], float durs[]) {
     for(0 => int i; i < notes.size(); i++) {
