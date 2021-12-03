@@ -231,7 +231,6 @@ while (true) {
 }
 
 fun int midi(string name) {
-    if (name=="-1") return 0;
     [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
     name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
     notes[base] => int note;
@@ -257,11 +256,16 @@ fun int midi(string name) {
 }
 
 fun void playPiano(StkInstrument instrument, string note, float durs) {
-    Std.mtof(midi(note)) => instrument.freq;
-    0.1 => instrument.noteOn;
-    (durs-TN/2.0)::second => now;
-    1 => instrument.noteOff;
-    (TN/2.0)::second => now;
+    if(note == "-1") {
+        durs::second => now;
+    }
+    else {
+        Std.mtof(midi(note)) => instrument.freq;
+        0.2 => instrument.noteOn;
+        (durs-TN/2.0)::second => now;
+        1 => instrument.noteOff;
+        (TN/2.0)::second => now;
+    }
 }
 
 fun void playPiano(StkInstrument instrument, string note, float durs, float delay) {

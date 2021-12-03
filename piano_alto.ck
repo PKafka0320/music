@@ -12,6 +12,7 @@ QN / 4 => SN; // 1, 0.2s
 QN / 8 => TN; // 0.5, 0.1s
 SN + TN => float SPT; // 1.5
 SN - TN => float SMT; // 0.5
+EN + SN => float EPS; // 3
 
 NRev global_reverb => dac;
 0.1 => global_reverb.mix;
@@ -32,6 +33,8 @@ Rhodey r3 => global_reverb;
 ["B4","G4"] @=> string mnotes10[]; // M:
 ["A4","F#4"] @=> string mnotes11[]; // M;
 ["G4","D4"] @=> string mnotes12[]; // M<
+["A4","D4"] @=> string mnotes13[]; // M=
+["B4","F#4"] @=> string mnotes14[]; // M>
 
 [
 "-1", // -1.1-
@@ -54,12 +57,63 @@ Rhodey r3 => global_reverb;
 "M4","E2", "E2","-1","-1",
 "M1","E4","M:","E4", "M1","E4","M:","E4", // -1.5-
 "M2","D4","M;","D4", "M2","D4","M;","D4",
-"M3","D4","M;","D4", "M3","D4","M;","D4"
- // -2.1-
+"M3","D4","M;","D4", "M3","D4","M;","D4",
+"M4","B3","M<","B3", "E2","E3","-1", // -2.1-
+"M1","E4","M:","E4", "M1","E4","M:","E4",
+"M2","D4","M;","D4", "M2","D4","M;","D4",
+"M3","D4","M;","D4", "M3","D4","M;","D4", // -2.2-
+"M3","B3","M=","B3", "M3","D4","-1",
+"M1","E4","G4","E4", "M1","G4","F#4","D4",
+"D2","D3","D4","D5","D4","D3", "D2","D4","G3","F#2", // -2.3-
+"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4",
+"E2","E3", "-1", // -2.4-
+"M1","E4","M:","E4", "M1","E4","M:","E4",
+"M2","D4","M;","D4", "M2","D4","M;","D4",
+"M3","D4","M;","D4", "G3","D4","M;","D4", // -2.5-
+"M4","B3","M=","B3", "M4","D4","-1",
+"M1","-1", "-1","G4","F#4","D4",
+"D2","D4","D5","D4","D3", "-1","D4","G3","F#2",
+"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4", // -3.1-
+"E2","E3", "-1",
+"M1","E4","G4","E4", "A3","G4","F#4","D4",
+"D2","D3","D4","D5","D4","D3", "-1","D4","G3","F#2",  // -3.2-
+"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4",
+"E2","E3", "-1",
+"M1","M5","-1", "A3","-1","M5","-1",
+"M2","M6","-1", "D3","-1","M7","-1", // -3.3-
+"M3","M8","-1", "G3","-1","M8","-1",
+"M4","M9","-1", "E3","-1","-1",
+"M1","M5","-1", "A3","-1","M5","-1",
+"M2","M6","-1", "D3","-1","M7","-1", // -3.4-
+"M3","M8","-1", "G3","-1","M8","-1",
+"M4","E2", "E2","-1","-1",
+"M1","E4","G4","E4", "M1","E4","G4","E4",
+"M2","D4","M;","D4", "M2","D4","M;","D4", // -3.5-
+"M3","D4","M;","D4", "M3","D4","M;","D4",
+"M4","B3","M=","B3", "M4","B3","M=","B3",
+"M1","E4","G4","E4", "M1","E4","G4","E4",
+"M2","D4","F#4","D4", "M2","D4","F#4","D4", // -4.1-
+"M4","D4","G4","D4", "M4","D4","G4","D4",
+"M3","D4","G4","D4", "M3","D4","G4","D4",
+"M1","E4","G4","E4", "M1","E4","G4","E4",
+"M2","D4","M>","D4", "M2","D4","M;","D4", // -4.2-
+"M3","D4","F#4","D4", "M3","D4","F#4","D4",
+"M4","B3","M=","B3", "M4","B3","M=","B3",
+"M1","E4","G4","E4", "M1","E4","G4","E4",
+"M2","D4","F#4","D4", "M2","D4","G4","D4", // -4.3-
+"M4","D4","G4","D4", "M4","D4","G4","D4",
+"M3","D4","A4","D4", "M3","D4","A4","D4",
+"M1","-1", "-1",
+"M2","-1", "-1", // -4.4-
+"M3","-1", "-1",
+"M4","-1", "-1",
+"M1","-1", "-1",
+"-1", "-1",
+"M3","-1", "-1"
 ] @=> string anotes[];
 
 [
-"-1"
+"D2","D3","D4","D5","D4","D3", "-1","D4","G3","F#2"
 ] @=> string notes[];
 
 // 16 per block (8 per half block)
@@ -84,12 +138,63 @@ QN,EN,EN, EN,EN,EN,EN,
 QN,QN, QN,EN,EN,
 EN,EN,EN,EN, EN,EN,EN,EN, // -1.5-
 EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN
- // -2.1-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,QN, // -2.1-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -2.2-
+EN,EN,EN,EN, EN,EN,QN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,SPT,SMT,SPT,SMT, EN,EN,EN,EN, // -2.3-
+EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN,
+QN,QN, HN, // -2.4-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -2.5-
+EN,EN,EN,EN, EN,EN,QN,
+QN,QN, EN,EN,EN,EN,
+QN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN,
+EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN, // -3.1-
+QN,QN, HN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN, // -3.2-
+EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN,
+QN,QN, HN,
+QN,EN,EN, EN,EN,EN,EN,
+QN,EN,EN, EN,EN,EN,EN, // -3.3-
+QN,EN,EN, EN,EN,EN,EN,
+QN,EN,EN, EN,EN,QN,
+QN,EN,EN, EN,EN,EN,EN,
+QN,EN,EN, EN,EN,EN,EN, // -3.4-
+QN,EN,EN, EN,EN,EN,EN,
+QN,QN, QN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -3.5-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -4.1-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -4.2-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN, // -4.3-
+EN,EN,EN,EN, EN,EN,EN,EN,
+EN,EN,EN,EN, EN,EN,EN,EN,
+QN,QN, HN,
+QN,QN, HN, // -4.4-
+QN,QN, HN,
+QN,QN, HN,
+QN,QN, HN,
+HN, HN,
+QN,QN, HN
 ] @=> float adurs[];
 
 [
-HN
+EN,EN,SN,SN,SN,SN, SN,EPS,EN,EN
 ] @=> float durs[];
 
 while (true) {
@@ -103,7 +208,6 @@ while (true) {
 }
 
 fun int midi(string name) {
-    if (name=="-1") return 0;
     [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
     name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
     notes[base] => int note;
@@ -129,21 +233,16 @@ fun int midi(string name) {
 }
 
 fun void playPiano(StkInstrument instrument, string note, float durs) {
-    Std.mtof(midi(note)) => instrument.freq;
-    0.2 => instrument.noteOn;
-    (durs-TN/2.0)::second => now;
-    1 => instrument.noteOff;
-    (TN/2.0)::second => now;
-}
-
-fun void playPiano(StkInstrument instrument, string note, float durs, float delay) {
-    Std.mtof(midi(note)) => instrument.freq;
-    1 => instrument.noteOff;
-    delay::second => now;
-    0.2 => instrument.noteOn;
-    (durs-delay-TN/2.0)::second => now;
-    1 => instrument.noteOff;
-    (TN/2.0)::second => now;
+    if(note == "-1") {
+        durs::second => now;
+    }
+    else {
+        Std.mtof(midi(note)) => instrument.freq;
+        0.4 => instrument.noteOn;
+        (durs-TN/2.0)::second => now;
+        1 => instrument.noteOff;
+        (TN/2.0)::second => now;
+    }
 }
 
 fun void piano(string notes[], float durs[]) {
@@ -205,6 +304,14 @@ fun void piano(string notes[], float durs[]) {
             else if(notes[i].charAt(1)-48 == 12) { // M<
                 spork ~ playPiano(r1, mnotes12[0], durs[i]);
                 spork ~ playPiano(r2, mnotes12[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 13) { // M=
+                spork ~ playPiano(r1, mnotes13[0], durs[i]);
+                spork ~ playPiano(r2, mnotes13[1], durs[i]);
+            }
+            else if(notes[i].charAt(1)-48 == 14) { // M>
+                spork ~ playPiano(r1, mnotes14[0], durs[i]);
+                spork ~ playPiano(r2, mnotes14[1], durs[i]);
             }
             durs[i]::second => now;
         }
