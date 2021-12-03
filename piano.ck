@@ -1,4 +1,4 @@
-public class RPiano {
+public class Piano {
     fun int midi(string name) {
         [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
         name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
@@ -31,9 +31,9 @@ public class RPiano {
         else {
             Std.mtof(midi(note)) => instrument.freq;
             0.2 => instrument.noteOn;
-            (durs-TN/2.0)::second => now;
+            (durs-0.05)::second => now;
             1 => instrument.noteOff;
-            (TN/2.0)::second => now;
+            0.05::second => now;
         }
     }
     
@@ -42,8 +42,8 @@ public class RPiano {
         1 => instrument.noteOff;
         delay::second => now;
         0.1 => instrument.noteOn;
-        (durs-delay-TN/2.0)::second => now;
+        (durs-delay-0.05)::second => now;
         1 => instrument.noteOff;
-        (TN/2.0)::second => now;
+        0.05::second => now;
     }
 }

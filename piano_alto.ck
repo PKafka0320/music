@@ -7,12 +7,12 @@ t.TN => float TN;
 t.SPT => float SPT;
 t.SMT => float SMT;
 t.EPS => float EPS;
+Piano p;
 
 OscIn oin;
 1979 => oin.port;
 oin.addAddress("/hotMilk/piano/alto");
 OscMsg msg;
-
 
 NRev global_reverb => dac;
 0.1 => global_reverb.mix;
@@ -199,111 +199,73 @@ while (true) {
     }
 }
 
-fun int midi(string name) {
-        [21,23,12,14,16,17,19] @=> int notes[]; // A0,B0,C0,D0,E0,F0,G0
-        name.charAt(0) - 65 => int base; // A=0,B=1,C=2,D=3,E=4,F=5,G=6
-        notes[base] => int note;
-        if (0 <= base && base <= 6) {
-            if (name.charAt(1) == '#' || name.charAt(1) == 's') // sharp
-                notes[base] + 1 => note;
-            if (name.charAt(1) == 'b' || name.charAt(1) == 'f') // flat
-                notes[base] - 1 => note;
-        }
-        else {
-            <<< "Illegal Note Name!" >>>;
-            return 0;
-        }
-        name.charAt(name.length()-1) - 48 => int oct; // 0, 1, 2, ..., 9
-        if (0 <= oct && oct <= 9) {
-            12 * (oct-1) +=> note;
-            return note;
-        }
-        else {
-            <<< "Illegal Octave!" >>>;
-            return 0;
-        }
-    }
-    
-    fun void playPiano(StkInstrument instrument, string note, float durs) {
-        if(note == "-1") {
-            durs::second => now;
-        }
-        else {
-            Std.mtof(midi(note)) => instrument.freq;
-            0.2 => instrument.noteOn;
-            (durs-TN/2.0)::second => now;
-            1 => instrument.noteOff;
-            (TN/2.0)::second => now;
-        }
-    }
-
 fun void piano(string notes[], float durs[]) {
     for(0 => int i; i < notes.size(); i++) {
         if(notes[i].charAt(0)-77 != 0) { // not M
-            spork ~ playPiano(r, notes[i], durs[i]);
+            spork ~ p.playPiano(r, notes[i], durs[i]);
             durs[i]::second => now;
         }
         else{ // M
             if(notes[i].charAt(1)-48 == 1) { // M1
-                spork ~ playPiano(r1, mnotes1[0], durs[i]);
-                spork ~ playPiano(r2, mnotes1[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes1[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes1[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 2) { // M2
-                spork ~ playPiano(r1, mnotes2[0], durs[i]);
-                spork ~ playPiano(r2, mnotes2[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes2[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes2[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 3) { // M3
-                spork ~ playPiano(r1, mnotes3[0], durs[i]);
-                spork ~ playPiano(r2, mnotes3[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes3[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes3[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 4) { // M4
-                spork ~ playPiano(r1, mnotes4[0], durs[i]);
-                spork ~ playPiano(r2, mnotes4[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes4[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes4[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 5) { // M5
-                spork ~ playPiano(r1, mnotes5[0], durs[i]);
-                spork ~ playPiano(r2, mnotes5[1], durs[i]);
-                spork ~ playPiano(r3, mnotes5[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes5[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes5[1], durs[i]);
+                spork ~ p.playPiano(r3, mnotes5[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 6) { // M6
-                spork ~ playPiano(r1, mnotes6[0], durs[i]);
-                spork ~ playPiano(r2, mnotes6[1], durs[i]);
-                spork ~ playPiano(r3, mnotes6[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes6[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes6[1], durs[i]);
+                spork ~ p.playPiano(r3, mnotes6[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 7) { // M7
-                spork ~ playPiano(r1, mnotes7[0], durs[i]);
-                spork ~ playPiano(r2, mnotes7[1], durs[i]);
-                spork ~ playPiano(r3, mnotes7[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes7[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes7[1], durs[i]);
+                spork ~ p.playPiano(r3, mnotes7[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 8) { // M8
-                spork ~ playPiano(r1, mnotes8[0], durs[i]);
-                spork ~ playPiano(r2, mnotes8[1], durs[i]);
-                spork ~ playPiano(r3, mnotes8[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes8[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes8[1], durs[i]);
+                spork ~ p.playPiano(r3, mnotes8[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 9) { // M9
-                spork ~ playPiano(r1, mnotes9[0], durs[i]);
-                spork ~ playPiano(r2, mnotes9[1], durs[i]);
-                spork ~ playPiano(r3, mnotes9[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes9[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes9[1], durs[i]);
+                spork ~ p.playPiano(r3, mnotes9[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 10) { // M:
-                spork ~ playPiano(r1, mnotes10[0], durs[i]);
-                spork ~ playPiano(r2, mnotes10[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes10[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes10[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 11) { // M;
-                spork ~ playPiano(r1, mnotes11[0], durs[i]);
-                spork ~ playPiano(r2, mnotes11[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes11[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes11[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 12) { // M<
-                spork ~ playPiano(r1, mnotes12[0], durs[i]);
-                spork ~ playPiano(r2, mnotes12[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes12[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes12[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 13) { // M=
-                spork ~ playPiano(r1, mnotes13[0], durs[i]);
-                spork ~ playPiano(r2, mnotes13[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes13[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes13[1], durs[i]);
             }
             else if(notes[i].charAt(1)-48 == 14) { // M>
-                spork ~ playPiano(r1, mnotes14[0], durs[i]);
-                spork ~ playPiano(r2, mnotes14[1], durs[i]);
+                spork ~ p.playPiano(r1, mnotes14[0], durs[i]);
+                spork ~ p.playPiano(r2, mnotes14[1], durs[i]);
             }
             durs[i]::second => now;
         }
