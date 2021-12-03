@@ -109,7 +109,7 @@ Rhodey r3 => global_reverb;
 "M4","-1", "-1",
 "M1","-1", "-1",
 "-1", "-1",
-"M3","-1", "-1"
+"M3","-1", "-1" // -4.5-
 ] @=> string anotes[];
 
 [
@@ -190,7 +190,7 @@ QN,QN, HN,
 QN,QN, HN,
 QN,QN, HN,
 HN, HN,
-QN,QN, HN
+QN,QN, HN // -4.5-
 ] @=> float adurs[];
 
 [
