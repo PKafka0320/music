@@ -10,5 +10,5 @@ while(true) {
     piano_alto.add(1);
     piano_soprano.send();
     piano_alto.send();
-    4.5::minute => now;
+    4::minute => now;
 }
