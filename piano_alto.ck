@@ -36,165 +36,147 @@ Rhodey r3 => global_reverb;
 ["A4","D4"] @=> string mnotes13[]; // M=
 ["B4","F#4"] @=> string mnotes14[]; // M>
 
-[
-"-1", // -1.1-
-"-1", "-1",
-"M1","-1", "-1",
-"M2","-1", "-1",
-"M3","-1", "-1",
-"M4","-1", "-1", // -1.2-
-"M1","-1", "-1",
-"M2","-1", "-1",
-"M3","-1", "-1",
-"M4","-1", "-1",
-"M1","M5","-1", "A3","-1","M5","-1", // -1.3-
-"M2","M6","-1", "D3","-1","M7","-1",
-"M3","M8","-1", "G3","-1","M8","-1",
-"M4","M9","-1", "E3","-1","-1",
-"M1","M5","-1", "A3","-1","M5","-1", // -1.4-
-"M2","M6","-1", "D3","-1","M7","-1",
-"M3","M8","-1", "G3","-1","M8","-1",
-"M4","E2", "E2","-1","-1",
-"M1","E4","M:","E4", "M1","E4","M:","E4", // -1.5-
-"M2","D4","M;","D4", "M2","D4","M;","D4",
-"M3","D4","M;","D4", "M3","D4","M;","D4",
-"M4","B3","M<","B3", "E2","E3","-1", // -2.1-
-"M1","E4","M:","E4", "M1","E4","M:","E4",
-"M2","D4","M;","D4", "M2","D4","M;","D4",
-"M3","D4","M;","D4", "M3","D4","M;","D4", // -2.2-
-"M3","B3","M=","B3", "M3","D4","-1",
-"M1","E4","G4","E4", "M1","G4","F#4","D4",
-"D2","D3","D4","D5","D4","D3", "D2","D4","G3","F#2", // -2.3-
-"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4",
-"E2","E3", "-1", // -2.4-
-"M1","E4","M:","E4", "M1","E4","M:","E4",
-"M2","D4","M;","D4", "M2","D4","M;","D4",
-"M3","D4","M;","D4", "G3","D4","M;","D4", // -2.5-
-"M4","B3","M=","B3", "M4","D4","-1",
-"M1","-1", "-1","G4","F#4","D4",
-"D2","D4","D5","D4","D3", "-1","D4","G3","F#2",
-"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4", // -3.1-
-"E2","E3", "-1",
-"M1","E4","G4","E4", "A3","G4","F#4","D4",
-"D2","D3","D4","D5","D4","D3", "-1","D4","G3","F#2",  // -3.2-
-"G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4",
-"E2","E3", "-1",
-"M1","M5","-1", "A3","-1","M5","-1",
-"M2","M6","-1", "D3","-1","M7","-1", // -3.3-
-"M3","M8","-1", "G3","-1","M8","-1",
-"M4","M9","-1", "E3","-1","-1",
-"M1","M5","-1", "A3","-1","M5","-1",
-"M2","M6","-1", "D3","-1","M7","-1", // -3.4-
-"M3","M8","-1", "G3","-1","M8","-1",
-"M4","E2", "E2","-1","-1",
-"M1","E4","G4","E4", "M1","E4","G4","E4",
-"M2","D4","M;","D4", "M2","D4","M;","D4", // -3.5-
-"M3","D4","M;","D4", "M3","D4","M;","D4",
-"M4","B3","M=","B3", "M4","B3","M=","B3",
-"M1","E4","G4","E4", "M1","E4","G4","E4",
-"M2","D4","F#4","D4", "M2","D4","F#4","D4", // -4.1-
-"M4","D4","G4","D4", "M4","D4","G4","D4",
-"M3","D4","G4","D4", "M3","D4","G4","D4",
-"M1","E4","G4","E4", "M1","E4","G4","E4",
-"M2","D4","M>","D4", "M2","D4","M;","D4", // -4.2-
-"M3","D4","F#4","D4", "M3","D4","F#4","D4",
-"M4","B3","M=","B3", "M4","B3","M=","B3",
-"M1","E4","G4","E4", "M1","E4","G4","E4",
-"M2","D4","F#4","D4", "M2","D4","G4","D4", // -4.3-
-"M4","D4","G4","D4", "M4","D4","G4","D4",
-"M3","D4","A4","D4", "M3","D4","A4","D4",
-"M1","-1", "-1",
-"M2","-1", "-1", // -4.4-
-"M3","-1", "-1",
-"M4","-1", "-1",
-"M1","-1", "-1",
-"-1", "-1",
-"M3","-1", "-1" // -4.5-
-] @=> string anotes[];
+["M1","-1", "-1"] @=> string notes1[];
+["M2","-1", "-1"] @=> string notes2[];
+["M3","-1", "-1"] @=> string notes3[];
+["M4","-1", "-1"] @=> string notes4[];
+["M1","M5","-1", "A3","-1","M5","-1"] @=> string notes5[];
+["M2","M6","-1", "D3","-1","M7","-1"] @=> string notes6[];
+["M3","M8","-1", "G3","-1","M8","-1"] @=> string notes7[];
+["M4","M9","-1", "E3","-1","-1"] @=> string notes8[];
+["M4","E2", "E2","-1","-1"] @=> string notes9[];
+["M1","E4","M:","E4", "M1","E4","M:","E4"] @=> string notes10[];
+["M2","D4","M;","D4", "M2","D4","M;","D4"] @=> string notes11[];
+["M3","D4","M;","D4", "M3","D4","M;","D4"] @=> string notes12[];
+["M4","B3","M<","B3", "E2","E3","-1"] @=> string notes13[];
+["M3","B3","M=","B3", "M3","D4","-1"] @=> string notes14[];
+["M1","E4","G4","E4", "M1","G4","F#4","D4"] @=> string notes15[];
+["D2","D3","D4","D5","D4","D3", "D2","D4","G3","F#2"] @=> string notes16[];
+["G2","G3","-1","G2","G3", "-1","G2","G2","F#3","D4"] @=> string notes17[];
+["E2","E3", "-1"] @=> string notes18[];
+["M3","D4","M;","D4", "G3","D4","M;","D4"] @=> string notes19[];
+["M1","-1", "-1","G4","F#4","D4"] @=> string notes20[];
+["D2","D4","D5","D4","D3", "-1","D4","G3","F#2"] @=> string notes21[];
+["M1","E4","G4","E4", "A3","G4","F#4","D4"] @=> string notes22[];
+["D2","D3","D4","D5","D4","D3", "-1","D4","G3","F#2"] @=> string notes23[];
+["M1","E4","G4","E4", "M1","E4","G4","E4"] @=> string notes24[];
+["M4","B3","M=","B3", "M4","B3","M=","B3"] @=> string notes25[];
+["M2","D4","F#4","D4", "M2","D4","F#4","D4"] @=> string notes26[];
+["M4","D4","G4","D4", "M4","D4","G4","D4"] @=> string notes27[];
+["M3","D4","G4","D4", "M3","D4","G4","D4"] @=> string notes28[];
+["M2","D4","M>","D4", "M2","D4","M;","D4"] @=> string notes29[];
+["M3","D4","F#4","D4", "M3","D4","F#4","D4"] @=> string notes30[];
+["M2","D4","F#4","D4", "M2","D4","G4","D4"] @=> string notes31[];
+["M3","D4","A4","D4", "M3","D4","A4","D4"] @=> string notes32[];
 
-// 16 per block (8 per half block)
-[
-HN, // -1.1-
-HN, HN,
-QN,QN, HN,
-QN,QN, HN,
-QN,QN, HN,
-QN,QN, HN, // -1.2-
-QN,QN, HN,
-QN,QN, HN,
-QN,QN, HN,
-QN,QN, HN,
-QN,EN,EN, EN,EN,EN,EN, // -1.3-
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,QN,
-QN,EN,EN, EN,EN,EN,EN, // -1.4-
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,EN,EN,
-QN,QN, QN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -1.5-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,QN, // -2.1-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -2.2-
-EN,EN,EN,EN, EN,EN,QN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,SPT,SMT,SPT,SMT, EN,EN,EN,EN, // -2.3-
-EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN,
-QN,QN, HN, // -2.4-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -2.5-
-EN,EN,EN,EN, EN,EN,QN,
-QN,QN, EN,EN,EN,EN,
-QN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN,
-EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN, // -3.1-
-QN,QN, HN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN, // -3.2-
-EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN,
-QN,QN, HN,
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,EN,EN, // -3.3-
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,QN,
-QN,EN,EN, EN,EN,EN,EN,
-QN,EN,EN, EN,EN,EN,EN, // -3.4-
-QN,EN,EN, EN,EN,EN,EN,
-QN,QN, QN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -3.5-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -4.1-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -4.2-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN, // -4.3-
-EN,EN,EN,EN, EN,EN,EN,EN,
-EN,EN,EN,EN, EN,EN,EN,EN,
-QN,QN, HN,
-QN,QN, HN, // -4.4-
-QN,QN, HN,
-QN,QN, HN,
-QN,QN, HN,
-HN, HN,
-QN,QN, HN // -4.5-
-] @=> float adurs[];
+[EN,EN,EN,EN, EN,EN,EN,EN] @=> float durs1[]; //10,11,12,15,19,23,25,26,27,28,29,30,31,32,33
+[QN,QN, HN] @=> float durs2[]; // 1,2,3,4,18
+[QN,EN,EN, EN,EN,EN,EN] @=> float durs3[]; // 5,6,7
+[QN,EN,EN, EN,EN,QN] @=> float durs4[]; // 8
+[QN,QN, QN,EN,EN] @=> float durs5[]; // 9
+[EN,EN,EN,EN, EN,EN,QN] @=> float durs6[]; // 13,14,20
+[EN,EN,SPT,SMT,SPT,SMT, EN,EN,EN,EN] @=> float durs7[]; // 16
+[EPS,SN,SN,EN,SN, SN,EN,SN,EN,EN] @=> float durs8[]; // 17
+[QN,QN, EN,EN,EN,EN] @=> float durs9[]; // 21
+[QN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN] @=> float durs10[]; // 22
+[EN,EN,SPT,SMT,SPT,SMT, SN,EPS,EN,EN] @=> float durs11[]; // 24
 
 while (true) {
     oin => now;
     while (oin.recv(msg) != 0) {
         msg.getInt(0) => int play;
-        if (play) {
-            spork ~ piano(anotes, adurs);
+        if (play == 1) {
+            spork ~ piano(notes1, durs2);
+        }
+        else if (play == 2) {
+            spork ~ piano(notes2, durs2);
+        }
+        else if (play == 3) {
+            spork ~ piano(notes3, durs2);
+        }
+        else if (play == 4) {
+            spork ~ piano(notes4, durs2);
+        }
+        else if (play == 5) {
+            spork ~ piano(notes5, durs3);
+        }
+        else if (play == 6) {
+            spork ~ piano(notes6, durs3);
+        }
+        else if (play == 7) {
+            spork ~ piano(notes7, durs3);
+        }
+        else if (play == 8) {
+            spork ~ piano(notes8, durs4);
+        }
+        else if (play == 9) {
+            spork ~ piano(notes9, durs5);
+        }
+        else if (play == 10) {
+            spork ~ piano(notes10, durs1);
+        }
+        else if (play == 11) {
+            spork ~ piano(notes11, durs1);
+        }
+        else if (play == 12) {
+            spork ~ piano(notes12, durs1);
+        }
+        else if (play == 13) {
+            spork ~ piano(notes13, durs6);
+        }
+        else if (play == 14) {
+            spork ~ piano(notes14, durs6);
+        }
+        else if (play == 15) {
+            spork ~ piano(notes15, durs1);
+        }
+        else if (play == 16) {
+            spork ~ piano(notes16, durs7);
+        }
+        else if (play == 17) {
+            spork ~ piano(notes17, durs8);
+        }
+        else if (play == 19) {
+            spork ~ piano(notes19, durs1);
+        }
+        else if (play == 20) {
+            spork ~ piano(notes20, durs6);
+        }
+        else if (play == 21) {
+            spork ~ piano(notes21, durs9);
+        }
+        else if (play == 22) {
+            spork ~ piano(notes22, durs10);
+        }
+        else if (play == 23) {
+            spork ~ piano(notes23, durs1);
+        }
+        else if (play == 24) {
+            spork ~ piano(notes24, durs11);
+        }
+        else if (play == 25) {
+            spork ~ piano(notes25, durs1);
+        }
+        else if (play == 26) {
+            spork ~ piano(notes26, durs1);
+        }
+        else if (play == 27) {
+            spork ~ piano(notes27, durs1);
+        }
+        else if (play == 28) {
+            spork ~ piano(notes28, durs1);
+        }
+        else if (play == 29) {
+            spork ~ piano(notes29, durs1);
+        }
+        else if (play == 30) {
+            spork ~ piano(notes30, durs1);
+        }
+        else if (play == 31) {
+            spork ~ piano(notes31, durs1);
+        }
+        else if (play == 32) {
+            spork ~ piano(notes32, durs1);
         }
     }
 }

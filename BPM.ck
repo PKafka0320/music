@@ -1,7 +1,8 @@
 public class BPM {
-    static float HN, QN, EN, SN, TN, SPT, SMT, EPS;
+    static float WN, HN, QN, EN, SN, TN, SPT, SMT, EPS;
     75.0 => float beat;
     60.0 / beat => QN; // Second per Beat, 4, 0.8s
+    QN * 4 => WN; // 16, 3.2s
     QN * 2 => HN; // 8, 1.6s
     QN / 2 => EN; // 2, 0.4s
     QN / 4 => SN; // 1, 0.2s
