@@ -37,6 +37,19 @@ public class Piano {
         }
     }
     
+    fun void playPianor(StkInstrument instrument, string note, float durs) {
+        if(note == "-1") {
+            durs::second => now;
+        }
+        else {
+            Std.mtof(midi(note)) => instrument.freq;
+            0.4 => instrument.noteOn;
+            (durs-0.05)::second => now;
+            1 => instrument.noteOff;
+            0.05::second => now;
+        }
+    }
+    
     fun void playPiano(StkInstrument instrument, string note, float durs, float delay) {
         Std.mtof(midi(note)) => instrument.freq;
         1 => instrument.noteOff;
