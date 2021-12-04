@@ -140,19 +140,19 @@ while (true) {
             spork ~ piano(notes19, durs1);
         }
         else if (play == 20) {
-            spork ~ piano(notes20, durs6);
+            spork ~ piano(notes20, durs9);
         }
         else if (play == 21) {
-            spork ~ piano(notes21, durs9);
+            spork ~ piano(notes21, durs10);
         }
         else if (play == 22) {
-            spork ~ piano(notes22, durs10);
+            spork ~ piano(notes22, durs1);
         }
         else if (play == 23) {
-            spork ~ piano(notes23, durs1);
+            spork ~ piano(notes23, durs11);
         }
         else if (play == 24) {
-            spork ~ piano(notes24, durs11);
+            spork ~ piano(notes24, durs1);
         }
         else if (play == 25) {
             spork ~ piano(notes25, durs1);

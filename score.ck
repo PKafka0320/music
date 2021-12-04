@@ -317,5 +317,5 @@ while(true) {
     piano_alto.send();
     W => now;
     
-    W => now;
+    4*W => now;
 }
